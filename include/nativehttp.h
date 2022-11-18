@@ -66,7 +66,7 @@ typedef std::string bstring;
 
 void Dconsole(void* log, const bool& exception = false) {
     if (exception == false) {
-#ifdef _DEBUG
+#ifndef NDEBUG
         std::cout << "Debug: " << (char*)log << std::endl;
 #endif
     }
