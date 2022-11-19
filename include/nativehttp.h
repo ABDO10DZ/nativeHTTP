@@ -186,7 +186,7 @@ namespace nativeHTTP {
                 myreq.uri = utf8_to_wstring(UrlStructure.uri);
                 // something i'll add here later
                 myreq.port = UrlStructure.port;
-                std::wcout << "connecting to :h=" << myreq.host << "/U=" << myreq.uri << "/P=" << myreq.port << "\n";
+                Dconsole((void*)("connecting to :h=" + wstring_to_utf8(myreq.host) + "/U=" + wstring_to_utf8(myreq.uri) + "/P=" +std::to_string(myreq.port)+ "\n").c_str());    // i liked this
                 if (Options.OwnHeaders) {
                     SetHeaders(OwnedHeader.AddedHeaders, OwnedHeader.AddedHeaderSize);
                 }
