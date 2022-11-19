@@ -67,10 +67,10 @@ typedef std::string bstring;
 void Dconsole(void* log, const bool& exception = false) {
     if (exception == false) {
 #ifndef NDEBUG
-        std::cout << "Debug: " << (char*)log << std::endl;
+        std::cout << "[nativeHTTP] Debug: " << (char*)log << std::endl;
 #endif
     }
-    else std::cout << "Exception: " << (char*)log << std::endl;
+    else std::cout << "[nativeHTTP] Exception: " << (char*)log << std::endl;
 }
 namespace nativeHTTP {
     class Request {
