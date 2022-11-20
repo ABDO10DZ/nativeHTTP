@@ -5,14 +5,14 @@
 #ifndef nativeHTTP_H_
 #define nativeHTTP_H_
 #ifndef __cplusplus
-#error this header should be compiled with c++ compiler , try mingw/msvc
-#endif
-#ifndef _MSC_VER
-#warning "you may get some compiler Errors , prefered MSVC currently"
+#error this header should be compiled with c++ compiler try mingw/msvc
 #endif
 #ifdef __unix__
-#error "asap will be available for unix like" 
+#error asap will be available for unix like 
 #elif _WIN32 || _WIN64
+#ifndef _MSC_VER
+#warning you may get some compiler Errors prefered MSVC currently
+#endif
 #include <windows.h>
 #include <wininet.h>
 #include <winhttp.h>
@@ -215,13 +215,13 @@ namespace nativeHTTP {
                             INTERNET_FLAG_NO_UI |
                             INTERNET_FLAG_PRAGMA_NOCACHE |
                             INTERNET_FLAG_SECURE |
-                            INTERNET_FLAG_RELOAD, NULL);       // fih method / uri / http version api  ssl =INTERNET_FLAG_SECURE |
+                            INTERNET_FLAG_RELOAD, NULL);       // fih method / uri / http version api  ssl =INTERNET_FLAG_SECURE | ..will be edited next version
                         if (request == NULL) Dconsole((char*)"HttpOpenRequest failed");  // failed
 
                         if (request != NULL)
                         {
                             int  datalen = data.length();
-                            // headers , addi wela dropi 
+                            // headers , addi wela dropi .. ..will be edited next version 
 
                             std::string RH = "Connection: keep-Alive\r\n";
                             bHttpAddRequestHeaders(request, (LPCWSTR)RH.c_str(), _tcslen((LPCWSTR)RH.c_str()), HTTP_ADDREQ_FLAG_REPLACE | HTTP_ADDREQ_FLAG_ADD);
@@ -301,7 +301,7 @@ namespace nativeHTTP {
 
 
     public:
-        template<size_t hsize>bool SetHeader(const std::string(&header)[hsize]) {
+        template<size_t hsize>bool SetHeader(const std::string(&header)[hsize]) {   // to add or edit request header 
             if (hsize >= MAX_PATH) return false;
             Request::Options.OwnHeaders = true;
             Request::OwnedHeader.AddedHeaderSize = hsize;
