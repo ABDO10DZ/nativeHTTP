@@ -21,5 +21,7 @@ native C/C++ single header for Win/Unix implementation for http/s connections <b
 *add full support unicode <br>
 *add file upload post data with easy usage (mutipart file upload .. etc)<br>
 *add switch btw json post and other post requests <br>
+
+<br>huge updates are coming </br>
 *add winhttp support<br>
 *add unix support
