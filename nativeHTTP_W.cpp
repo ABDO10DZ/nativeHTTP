@@ -1,3 +1,5 @@
+// nativeHTTP win version CLI for nativeHTTP Library
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -425,6 +427,14 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    // FIXED: Ensure URL has protocol for HTTP requests
+    if (!is_websocket && url.find("://") == std::string::npos) {
+        url = "http://" + url;
+        if (verbose) {
+            std::cout << "DEBUG: Added protocol, url now = '" << url << "'\n";
+        }
+    }
+
     if (verbose) {
         std::cout << "DEBUG: final url variable = '" << url << "'\n";
     }
@@ -476,7 +486,6 @@ int main(int argc, char* argv[]) {
                 }
             }
         }
-
 #if !NATIVE_HTTP_WEBSOCKET_MINIMAL
         if (is_websocket) {
             EnhancedWebSocketHandler handler(output, verbose, true);
@@ -508,16 +517,21 @@ int main(int argc, char* argv[]) {
             // If --ws-message was provided, send it
             if (!ws_message.empty()) {
                 if (!silent) *output << " Sending message: " << ws_message << "\n";
+                
+                // FIXED: Small delay to ensure connection is fully established
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                
                 ws->send(ws_message);
 
-                // Wait for an echo reply. Use a reasonable timeout (5s).
+                // Wait for an echo reply with shorter timeout for testing
                 std::string reply;
-                bool got = handler.wait_for_message(5000, reply);
+                bool got = handler.wait_for_message(3000, reply); // 3 seconds instead of 10
 
                 if (got) {
                     if (!silent) *output << " Received reply: " << reply << "\n";
                 } else {
                     if (!silent) *output << " No reply within timeout\n";
+                    if (!silent) *output << " Connection may have issues - trying listen mode\n";
                 }
             }
 
