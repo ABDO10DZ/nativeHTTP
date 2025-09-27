@@ -42,7 +42,7 @@ Platform Support
 
 🚀 Quick Start
 Building from Source
-```
+```bash
 
 # Clone and build
 git clone <repository>
@@ -55,7 +55,7 @@ g++ -std=c++17 -O2 -I. -DNATIVE_HTTP_HTTP3_SUPPORT=0 -DNATIVE_HTTP_WEBSOCKET_MIN
 g++ -std=c++17 -O2 -I. -DNATIVE_HTTP_WEBSOCKET_MINIMAL=1 -o nativehttp.exe nativeHTTP_W.cpp -lwinhttp -lsecur32 -lcrypt32
 ```
 Basic CLI Usage
-```
+```bash
 # Simple GET request
 ./nativehttp.exe https://httpbin.org/get
 
@@ -67,7 +67,7 @@ Basic CLI Usage
 ```
 📖 CLI Reference
 Basic HTTP Requests
-```
+```bash
 
 # GET request
 ./nativehttp.exe https://api.example.com/data
@@ -85,7 +85,7 @@ Basic HTTP Requests
 ./nativehttp.exe -X DELETE https://api.example.com/delete/123
 ```
 Headers and Authentication
-```
+```bash
 
 # Custom headers
 ./nativehttp.exe -H "Authorization: Bearer token" -H "X-API-Key: secret" https://api.example.com/data
@@ -100,7 +100,7 @@ Headers and Authentication
 ./nativehttp.exe -A "MyApp/1.0" https://api.example.com/data
 ```
 File Uploads and Multipart Forms
-```
+```bash
 
 # Upload single file
 ./nativehttp.exe -F "file=@document.pdf" https://api.example.com/upload
@@ -115,7 +115,7 @@ File Uploads and Multipart Forms
 ./nativehttp.exe -F "image=@photo.png" -c "image/png" https://api.example.com/upload
 ```
 WebSocket Operations
-```
+```bash
 
 # Connect to WebSocket and send message
 ./nativehttp.exe --ws wss://echo.websocket.org --ws-message "Hello World"
@@ -133,7 +133,7 @@ WebSocket Operations
 ./nativehttp.exe --ws wss://example.com/ws --ws-ping 30 --ws-listen
 ```
 Advanced Options
-```
+```bash
 
 # Follow redirects
 ./nativehttp.exe -L https://example.com/redirect
@@ -160,7 +160,7 @@ Advanced Options
 ./nativehttp.exe -i https://api.example.com/data
 ```
 Proxy Support
-```
+```bash
 
 # HTTP proxy
 ./nativehttp.exe -x http://proxy.example.com:8080 https://api.example.com/data
@@ -172,7 +172,7 @@ Proxy Support
 ./nativehttp.exe -x http://user:pass@proxy.example.com:8080 https://api.example.com/data
 ```
 Cookie Management
-```
+```bash
 
 # Send cookies
 ./nativehttp.exe -b "session=abc123;user=john" https://api.example.com/data
@@ -185,7 +185,7 @@ Cookie Management
 ```
 📚 Library Usage
 Basic HTTP Client
-```
+```cpp
 
 #include "nativeHTTP.h"
 
@@ -199,7 +199,7 @@ if (response.success()) {
 }
 ```
 POST Requests
-```
+```cpp
 
 // POST JSON data
 nativeHTTP::Client client;
@@ -211,7 +211,7 @@ std::vector<uint8_t> data = {1, 2, 3, 4, 5};
 auto response = client.post("https://api.example.com/upload", data);
 ```
 Multipart Form Upload
-```
+```cpp
 
 nativeHTTP::Client client;
 nativeHTTP::MultipartFormData form;
@@ -227,7 +227,7 @@ form.add_file("photo", "avatar.jpg", "profile.jpg", "image/jpeg");
 auto response = client.post_form("https://api.example.com/upload", form);
 ```
 WebSocket Client
-```
+```cpp
 
 #include "nativeHTTP.h"
 
@@ -262,7 +262,7 @@ if (ws->connect()) {
 }
 ```
 Advanced Configuration
-```
+```cpp
 
 nativeHTTP::Client client;
 
@@ -291,7 +291,7 @@ std::vector<std::string> headers = {
 auto response = client.get("https://api.example.com/data", headers);
 ```
 Cookie Management
-```
+```cpp
 
 nativeHTTP::Client client;
 
@@ -308,7 +308,7 @@ client.get_cookie_jar().save_to_file("cookies.txt");
 client.get_cookie_jar().load_from_file("cookies.txt");
 ```
 Progress Tracking
-```
+```cpp
 
 bool progress_callback(size_t downloaded, size_t total, 
                       size_t uploaded, size_t upload_total) {
@@ -326,7 +326,7 @@ auto response = client.get("https://example.com/largefile.zip",
 ```
 🔧 Advanced Examples
 REST API Client
-```
+```cpp
 
 class ApiClient {
     nativeHTTP::Client client;
@@ -362,7 +362,7 @@ public:
 };
 ```
 Real-time WebSocket Application
-```
+```cpp
 
 class ChatClient : public nativeHTTP::Client::WebSocket::EventHandler {
     nativeHTTP::Client::WebSocket* ws;
@@ -396,7 +396,7 @@ public:
 };
 ```
 File Upload Service
-```
+```cpp
 
 class FileUploader {
 public:
@@ -492,7 +492,7 @@ public:
 Common Issues
 
 WebSocket Connection Fails:
-```
+```bash
 
 # Check if URL protocol is correct
 ./nativehttp.exe --ws ws://localhost:8765  # not http://
@@ -503,7 +503,7 @@ WebSocket Connection Fails:
 # Check firewall and port accessibility
 ```
 SSL Certificate Errors:
-```
+```bash
 
 # Temporarily disable verification (not recommended for production)
 ./nativehttp.exe -k https://self-signed.example.com
@@ -511,7 +511,7 @@ SSL Certificate Errors:
 # Or add certificate to system trust store
 ```
 Timeout Issues:
-```
+```bash
 
 # Increase timeout values
 ./nativehttp.exe --connect-timeout 60 --max-time 300 https://slow.api.com
@@ -519,12 +519,12 @@ Timeout Issues:
 Debug Mode
 
 Enable detailed logging:
-```
+```cpp
 
 nativeHTTP::Logger::set_level(nativeHTTP::Logger::DEBUG_LEVEL);
 ```
 Or via CLI:
-```
+```bash
 
 ./nativehttp.exe -v https://api.example.com/data
 ```
