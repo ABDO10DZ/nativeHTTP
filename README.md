@@ -580,3 +580,5 @@ For issues and questions:
     Review the code examples
 
     Open an issue on the project repository
+
+![Alt](https://repobeats.axiom.co/api/embed/b32933388373d82335376b7f98822dc3e5c82fe5.svg "Repobeats analytics image")
